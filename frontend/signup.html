@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Register - StayFinder</title>
+
+<!-- Lottie Animation -->
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<!-- FontAwesome -->
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+/* Background */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle at top,#1b2735,#090a0f);
+color:white;
+overflow:hidden;
+}
+
+/* Container */
+
+.container{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:80px;
+}
+
+/* Animation */
+
+.animation-box{
+width:350px;
+}
+
+/* Register Card */
+
+.register-card{
+width:380px;
+padding:40px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
+text-align:center;
+}
+
+/* Title */
+
+.register-card h2{
+margin-bottom:25px;
+}
+
+/* Input */
+
+.input-box{
+position:relative;
+margin-bottom:18px;
+}
+
+.input-box input{
+width:100%;
+padding:12px 40px;
+border:none;
+outline:none;
+border-radius:8px;
+}
+
+.input-box i{
+position:absolute;
+left:12px;
+top:13px;
+color:#555;
+}
+
+/* Button */
+
+.register-btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#4facfe;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.register-btn:hover{
+background:#00c6ff;
+transform:scale(1.05);
+}
+
+/* Link */
+
+.register-card p{
+margin-top:15px;
+font-size:14px;
+}
+
+.register-card a{
+color:#4facfe;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Cartoon Animation -->
+
+<div class="animation-box">
+
+<lottie-player
+src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
+background="transparent"
+speed="1"
+style="width:350px;height:350px;"
+loop
+autoplay> </lottie-player>
+
+</div>
+
+<!-- Register Form -->
+
+<div class="register-card">
+
+<h2>Create Account</h2>
+
+<form id="registerForm">
+
+<div class="input-box">
+<i class="fa fa-user"></i>
+<input type="text" id="name" placeholder="Full Name" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-envelope"></i>
+<input type="email" id="email" placeholder="Email" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-lock"></i>
+<input type="password" id="password" placeholder="Password" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-lock"></i>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+</div>
+
+<button class="register-btn">Register</button>
+
+</form>
+
+<p>Already have account? <a href="login.html">Login</a></p>
+
+</div>
+
+</div>
+
+<script>
+
+/* REGISTER API */
+
+const API_URL="http://localhost:5000/api/users/register";
+
+document.getElementById("registerForm").addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+const confirmPassword=document.getElementById("confirmPassword").value;
+
+if(password!==confirmPassword){
+alert("Passwords do not match");
+return;
+}
+
+const res=await fetch(API_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({name,email,password})
+});
+
+const data=await res.json();
+
+if(data.success){
+alert("Account Created Successfully ✅");
+window.location.href="login.html";
+}else{
+alert("Registration Failed");
+}
+
+});
+
+</script>
+
+</body>
+</html>

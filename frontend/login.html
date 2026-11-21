@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Login - StayFinder</title>
+
+<!-- Lottie Animation -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<!-- Particles -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+/* PARTICLES BACKGROUND */
+
+#particles-js{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* BODY BACKGROUND */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle at top,#1b2735,#090a0f);
+overflow:hidden;
+perspective:1000px;
+}
+
+/* FLOATING SHAPES */
+
+.shape{
+position:absolute;
+border-radius:50%;
+filter:blur(40px);
+opacity:0.25;
+animation:floatShape 12s infinite ease-in-out;
+}
+
+.shape1{
+width:200px;
+height:200px;
+background:#4facfe;
+top:10%;
+right:20%;
+}
+
+.shape2{
+width:250px;
+height:250px;
+background:#00f2fe;
+bottom:10%;
+left:15%;
+animation-delay:3s;
+}
+
+.shape3{
+width:150px;
+height:150px;
+background:#7f5af0;
+top:60%;
+right:35%;
+animation-delay:6s;
+}
+
+@keyframes floatShape{
+0%{transform:translateY(0)}
+50%{transform:translateY(-40px)}
+100%{transform:translateY(0)}
+}
+
+/* LEFT CARTOON */
+
+.animation-box{
+position:absolute;
+left:120px;
+top:50%;
+transform:translateY(-50%);
+}
+
+/* RIGHT CARTOON */
+
+.animation-box-right{
+position:absolute;
+right:120px;
+top:50%;
+transform:translateY(-50%);
+}
+
+/* LOGIN CARD */
+
+.login-card{
+width:370px;
+padding:40px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
+text-align:center;
+color:white;
+animation:cardEnter 1s ease;
+transition:transform 0.4s;
+}
+
+.login-card:hover{
+transform:rotateX(4deg) rotateY(-4deg) scale(1.02);
+}
+
+@keyframes cardEnter{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* TITLE */
+
+.typing{
+font-size:26px;
+font-weight:600;
+margin-bottom:25px;
+letter-spacing:1px;
+}
+
+/* INPUTS */
+
+.input-box{
+position:relative;
+margin-bottom:20px;
+}
+
+.input-box input{
+width:100%;
+padding:12px 40px;
+border:none;
+outline:none;
+border-radius:8px;
+background:#ffffff;
+}
+
+.input-box i{
+position:absolute;
+left:12px;
+top:13px;
+color:#555;
+}
+
+/* LOGIN BUTTON */
+
+.login-btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#4facfe;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-btn:hover{
+background:#00c6ff;
+transform:scale(1.05);
+box-shadow:0 0 10px #4facfe;
+}
+
+/* LINKS */
+
+.login-card p{
+margin-top:15px;
+font-size:14px;
+}
+
+.login-card a{
+color:#4facfe;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PARTICLES -->
+<div id="particles-js"></div>
+
+<!-- SHAPES -->
+<div class="shape shape1"></div>
+<div class="shape shape2"></div>
+<div class="shape shape3"></div>
+
+<!-- LEFT CARTOON -->
+
+<div class="animation-box">
+
+<lottie-player
+src="https://assets10.lottiefiles.com/packages/lf20_touohxv0.json"
+background="transparent"
+speed="1"
+style="width:320px;height:320px;"
+loop
+autoplay>
+</lottie-player>
+
+</div>
+
+<!-- RIGHT CARTOON -->
+
+<div class="animation-box-right">
+
+<lottie-player
+src="https://assets3.lottiefiles.com/packages/lf20_kkflmtur.json"
+background="transparent"
+speed="1"
+style="width:260px;height:260px;"
+loop
+autoplay>
+</lottie-player>
+
+</div>
+
+<!-- LOGIN CARD -->
+
+<div class="login-card">
+
+<div class="typing" id="typingText"></div>
+
+<form id="loginForm">
+
+<div class="input-box">
+<i class="fa fa-envelope"></i>
+<input type="email" id="email" placeholder="Email" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-lock"></i>
+<input type="password" id="password" placeholder="Password" required>
+</div>
+
+<button class="login-btn">Login</button>
+
+</form>
+
+<p>Don't have account? <a href="register.html">Register</a></p>
+
+</div>
+
+<script>
+
+/* TYPING EFFECT */
+
+const text="Welcome to StayFinder";
+let i=0;
+
+function typing(){
+if(i<text.length){
+document.getElementById("typingText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,80);
+}
+}
+
+typing();
+
+/* PARTICLES */
+
+tsParticles.load("particles-js",{
+particles:{
+number:{value:60},
+color:{value:"#4facfe"},
+shape:{type:"circle"},
+opacity:{value:0.5},
+size:{value:3},
+move:{enable:true,speed:1}
+},
+interactivity:{
+events:{
+onHover:{
+enable:true,
+mode:"repulse"
+}
+},
+modes:{
+repulse:{distance:120}
+}
+}
+});
+
+/* LOGIN API */
+const API_URL="http://localhost:5000/api/users/login";
+
+document.getElementById("loginForm").addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+
+try{
+
+const res=await fetch(API_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({email,password})
+});
+
+const data=await res.json();
+if(data.success){
+
+localStorage.setItem("user", JSON.stringify(data.user));
+
+alert("Login Successful ✅");
+
+window.location.href="index.html";
+
+}else{
+
+alert(data.message || "Invalid email or password");
+
+}
+
+}catch(error){
+
+console.log(error);
+alert("Server error");
+
+}
+
+});
+</script>
+
+</body>
+</html>

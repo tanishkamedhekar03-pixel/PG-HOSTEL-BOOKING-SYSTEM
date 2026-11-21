@@ -1,0 +1,514 @@
+/* ================= BODY ================= */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+  background-position: center;
+  animation: bgChange 40s infinite;
+  color: #222;
+}
+
+/* BACKGROUND IMAGE SLIDER */
+@keyframes bgChange {
+  0% { background-image: url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5"); }
+  25% { background-image: url("https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"); }
+  50% { background-image: url("https://images.unsplash.com/photo-1598928506311-c55ded91a20c"); }
+  75% { background-image: url("https://images.unsplash.com/photo-1560448075-bb485b067938"); }
+  100% { background-image: url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5"); }
+}
+
+/* ================= HERO ================= */
+.hero {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-overlay {
+  background: rgba(0,0,0,0.45);
+  padding: 60px;
+  border-radius: 15px;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+}
+
+.hero-title {
+  font-size: 55px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero-sub {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #f1f1f1;
+}
+
+/* ================= SEARCH BOX ================= */
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 260px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+}
+
+.search-box button {
+  padding: 12px 18px;
+  background: #ff9800;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* ================= WHY SECTION ================= */
+.why {
+  background: white;
+  padding: 70px 0;
+  text-align: center;
+}
+
+.icon {
+  font-size: 40px;
+  color: #ff9800;
+  margin-bottom: 10px;
+}
+
+.why h4 {
+  font-weight: 600;
+}
+
+/* ================= CONTACT ================= */
+.contact {
+  background: white;
+  padding: 60px;
+  text-align: center;
+}
+
+/* ================= PG CARD ================= */
+.pg-card {
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  overflow: hidden;
+  color: white;
+  transition: 0.4s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  cursor: pointer;
+}
+
+.pg-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.55);
+}
+
+/* PG IMAGE */
+.pg-img {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.pg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(100%);
+}
+
+/* PRICE TAG */
+.pg-price {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #ff9800;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* PG INFO */
+.pg-info {
+  padding: 15px;
+}
+
+.pg-info h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+}
+
+.pg-location {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* TAGS */
+.pg-tags {
+  margin: 10px 0;
+}
+
+.tag {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.type {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.gender {
+  background: #fce4ec;
+  color: #d81b60;
+}
+
+/* VIEW BUTTON */
+.view-btn {
+  display: block;
+  text-align: center;
+  background: linear-gradient(45deg,#00c853,#00e676);
+  color: white;
+  padding: 9px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: linear-gradient(45deg,#00e676,#00c853);
+  transform: scale(1.05);
+}
+
+/* ================= DETAILS PAGE ================= */
+.details-bg {
+  background: #f5f5f5;
+  color: #222;
+  padding: 40px;
+}
+
+.details-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.details-bg h2 {
+  color: #111;
+  font-weight: 700;
+}
+
+.location {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.details-bg p {
+  color: #333;
+  font-size: 16px;
+}
+
+/* ================= AMENITIES ================= */
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.amenities span {
+  background: #ffffff;
+  color: #111;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.amenities span:hover {
+  background: #0d6efd;
+  color: white;
+}
+
+/* ================= BOOK CARD ================= */
+.book-card {
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 10px;
+  position: sticky;
+  top: 100px;
+}
+
+/* ================= REVIEWS ================= */
+.review-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.review-card p {
+  font-size: 14px;
+}
+
+.review-card small {
+  color: #555;
+}
+
+/* ================= CARDS ================= */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.card img {
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* ================= ANIMATIONS ================= */
+.animation-box, .animation-box-right {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  opacity: 0.9;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.25;
+  animation: floatShape 12s infinite ease-in-out;
+}
+
+.shape1 { width: 200px; height: 200px; background: #4facfe; top:10%; right:20%; }
+.shape2 { width: 250px; height: 250px; background: #00f2fe; bottom:10%; left:15%; animation-delay:3s; }
+.shape3 { width: 150px; height: 150px; background: #7f5af0; top:60%; right:35%; animation-delay:6s; }
+
+@keyframes floatShape { 0%{transform:translateY(0)} 50%{transform:translateY(-40px)} 100%{transform:translateY(0)} }
+
+body::before {
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:#00c6ff;
+  filter:blur(160px);
+  opacity:0.25;
+  top:-150px;
+  right:-150px;
+}
+
+body::after {
+  content:"";
+  position:absolute;
+  width:450px;
+  height:450px;
+  background:#4facfe;
+  filter:blur(160px);
+  opacity:0.25;
+  bottom:-150px;
+  left:-150px;
+}
+
+/* ================= LOGIN CARD ================= */
+.login-card {
+  width: 380px;
+  padding: 45px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 22px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.7);
+  text-align: center;
+  color: white;
+  animation: cardEnter 1s ease;
+  transition: 0.4s;
+}
+
+.login-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* ================= FLOATING ICONS ================= */
+.floating-icons i {
+  position:absolute;
+  color:#4facfe;
+  font-size:28px;
+  opacity:0.5;
+  animation: floatIcon 6s infinite ease-in-out;
+}
+
+.floating-icons i:nth-child(1){ top:20%; left:45%; }
+.floating-icons i:nth-child(2){ top:70%; left:40%; animation-delay:2s; }
+.floating-icons i:nth-child(3){ top:30%; right:35%; animation-delay:3s; }
+.floating-icons i:nth-child(4){ top:60%; right:30%; animation-delay:4s; }
+
+@keyframes floatIcon { 0%{transform:translateY(0)} 50%{transform:translateY(-20px)} 100%{transform:translateY(0)} }
+
+/* ================= PG DETAILS TEXT ================= */
+#pgName { font-weight: bold; color: #000; }
+#pgLocation { color: #333; font-weight: 500; }
+#pgDescription { color: #444; font-size: 16px; }
+#pgPrice { font-size: 28px; font-weight: bold; color: green; }
+
+/* ================= TERMS & CONDITIONS POPUP ================= */
+.popupModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popupContent {
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  position: relative;
+}
+
+.popupClose {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popupContent h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.popupContent ol li {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+/* TERMS & CONDITIONS POPUP STYLING */
+.popupModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7); /* darker overlay for contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popupContent {
+  background: linear-gradient(135deg,#fffcf5,#fff7e6); /* light warm gradient */
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 550px;
+  max-height: 80%;
+  overflow-y: auto;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #222;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.popupClose {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ff5722;
+  transition: 0.3s;
+}
+
+.popupClose:hover {
+  transform: rotate(90deg);
+}
+
+.popupContent h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff9800;
+  font-size: 22px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+.popupContent ol li {
+  margin: 10px 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+.terms-container button {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.terms-container button:hover {
+  background: #ff6f00;
+  color: white;
+  transform: scale(1.05);
+}

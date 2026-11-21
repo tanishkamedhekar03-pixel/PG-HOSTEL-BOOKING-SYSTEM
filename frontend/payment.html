@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secure Payment</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <style>
+    body{
+      background: linear-gradient(135deg,#1d2671,#c33764);
+      color:white;
+      font-family: 'Poppins', sans-serif;
+      overflow:hidden;
+    }
+
+    /* Floating circles animation */
+    .circle{
+      position:absolute;
+      border-radius:50%;
+      background:rgba(255,255,255,0.1);
+      animation: float 8s infinite linear;
+    }
+
+    .circle:nth-child(1){ width:120px;height:120px; top:10%; left:20%; }
+    .circle:nth-child(2){ width:80px;height:80px; top:60%; left:70%; }
+    .circle:nth-child(3){ width:150px;height:150px; top:40%; left:10%; }
+
+    @keyframes float{
+      0%{ transform:translateY(0px); }
+      50%{ transform:translateY(-20px); }
+      100%{ transform:translateY(0px); }
+    }
+
+    .payment-box{
+      max-width:500px;
+      margin:80px auto;
+      background:white;
+      color:black;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+      animation: slideUp 0.6s ease;
+    }
+
+    @keyframes slideUp{
+      from{ transform:translateY(50px); opacity:0; }
+      to{ transform:translateY(0); opacity:1; }
+    }
+
+    .method{
+      padding:12px;
+      border:1px solid #ddd;
+      border-radius:10px;
+      margin-bottom:10px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .method:hover{
+      background:#f1f1f1;
+    }
+
+    .active{
+      border:2px solid #28a745;
+      background:#eafaf1;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ANIMATION -->
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="payment-box">
+
+  <h3 class="text-center mb-4">💳 Secure Payment</h3>
+
+  <!-- OPTIONS -->
+  <div id="methods">
+
+    <div class="method" onclick="selectMethod(this,'card')">💳 Card</div>
+    <div class="method" onclick="selectMethod(this,'upi')">📱 UPI</div>
+    <div class="method" onclick="selectMethod(this,'cash')">💵 Cash</div>
+    <div class="method" onclick="selectMethod(this,'cheque')">📄 Cheque</div>
+
+  </div>
+
+  <!-- FORM -->
+  <div id="formArea" class="mt-3"></div>
+
+  <button class="btn btn-success w-100 mt-3" onclick="payNow()">Pay Now</button>
+
+</div>
+
+<script>
+
+let selected = "";
+
+// SELECT METHOD
+function selectMethod(el, type){
+  selected = type;
+
+  document.querySelectorAll(".method").forEach(m => m.classList.remove("active"));
+  el.classList.add("active");
+
+  const form = document.getElementById("formArea");
+
+  if(type === "card"){
+    form.innerHTML = `
+      <input class="form-control mb-2" placeholder="Card Number">
+      <input class="form-control mb-2" placeholder="Card Holder Name">
+      <input class="form-control mb-2" placeholder="Expiry Date">
+      <input class="form-control mb-2" placeholder="CVV">
+    `;
+  }
+
+  else if(type === "upi"){
+    form.innerHTML = `
+      <input class="form-control mb-2" placeholder="Enter UPI ID (example@upi)">
+    `;
+  }
+
+  else if(type === "cash"){
+    form.innerHTML = `<p>Pay cash at PG during check-in.</p>`;
+  }
+
+  else if(type === "cheque"){
+    form.innerHTML = `
+      <input class="form-control mb-2" placeholder="Cheque Number">
+      <input class="form-control mb-2" placeholder="Bank Name">
+    `;
+  }
+}
+
+// PAYMENT
+async function payNow(){
+
+  if(!selected){
+    alert("Select payment method");
+    return;
+  }
+
+  const bookingId = localStorage.getItem("lastBookingId");
+
+  if(!bookingId){
+    alert("No booking found. Please book first.");
+    window.location.href = "index.html";
+    return;
+  }
+
+  try{
+    await fetch("http://localhost:5000/api/bookings/" + bookingId, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paymentStatus: "Paid" })
+    });
+
+    // POPUP
+    const popup = document.createElement("div");
+
+    popup.innerHTML = `
+      <div style="
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.6);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:9999;
+      ">
+        <div style="
+          background:white;
+          padding:30px;
+          border-radius:20px;
+          text-align:center;
+        ">
+          <h2 style="color:green;">✅ Payment Successful</h2>
+          <p>Your booking is confirmed 🎉</p>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(()=>{
+      window.location.href = "index.html";
+    },2000);
+
+  }catch(err){
+    alert("Payment failed ❌");
+    console.log(err);
+  }
+}
+
+  document.body.appendChild(popup);
+
+  setTimeout(()=>{
+    window.location.href = "index.html";
+  },2000);
+
+
+</script>
+
+</body>
+</html>

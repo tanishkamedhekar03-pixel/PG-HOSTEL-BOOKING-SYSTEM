@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Register - StayFinder</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0f2027;
+background:linear-gradient(to right,#2c5364,#203a43,#0f2027);
+font-family:Segoe UI;
+}
+
+.register-card{
+width:380px;
+padding:40px;
+background:white;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+.input-box{
+position:relative;
+margin-bottom:15px;
+}
+
+.input-box input{
+width:100%;
+padding:10px 35px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.input-box i{
+position:absolute;
+left:10px;
+top:11px;
+color:#666;
+}
+
+.register-btn{
+width:100%;
+padding:12px;
+border:none;
+background:#28a745;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.register-btn:hover{
+background:#218838;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="register-card">
+
+<h2>Create Account</h2>
+
+<form id="registerForm">
+
+<div class="input-box">
+<i class="fa fa-user"></i>
+<input type="text" id="name" placeholder="Full Name" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-envelope"></i>
+<input type="email" id="email" placeholder="Email" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-lock"></i>
+<input type="password" id="password" placeholder="Password" required>
+</div>
+
+<button class="register-btn">Register</button>
+
+</form>
+
+<p style="margin-top:10px">
+Already have account?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+<script>
+
+const API_URL="http://localhost:5000/api/users/register";
+
+document.getElementById("registerForm").addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+
+const res=await fetch(API_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({name,email,password})
+});
+
+const data=await res.json();
+
+if(data.success){
+
+alert("Registration Successful ✅");
+
+window.location.href="login.html";
+
+}else{
+
+alert(data.message || "Registration failed");
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Your Stay</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+background-size:400% 400%;
+animation:gradient 10s ease infinite;
+font-family:sans-serif;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.booking-card{
+width:420px;
+padding:40px;
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(15px);
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+color:white;
+}
+
+.book-btn{
+background:#ff9800;
+border:none;
+border-radius:30px;
+padding:10px;
+font-weight:bold;
+}
+
+#msgBox .alert{
+margin-bottom:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="booking-card">
+
+<h3 class="text-center mb-4">Book Your PG</h3>
+
+<form id="bookingForm">
+
+<div id="msgBox"></div>
+
+<div class="mb-3">
+<label>Start Date</label>
+<input type="date" class="form-control" id="startDate" required>
+</div>
+
+<div class="mb-3">
+<label>End Date</label>
+<input type="date" class="form-control" id="endDate" required>
+</div>
+
+<button class="btn book-btn w-100">
+Confirm Booking
+</button>
+
+</form>
+
+</div>
+<script>
+
+const form = document.getElementById("bookingForm");
+
+form.addEventListener("submit", async function(e){
+e.preventDefault();
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+if(!user){
+alert("Please login first");
+return;
+}
+
+const startDate = document.getElementById("startDate").value;
+const endDate = document.getElementById("endDate").value;
+
+const params = new URLSearchParams(window.location.search);
+const pgId = params.get("id");
+
+console.log("SENDING DATA:", {
+userId: user._id,
+pgId: pgId,
+startDate: startDate,
+endDate: endDate
+});
+
+try{
+
+const res = await fetch("http://localhost:5000/api/bookings",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({
+userId: user._id,
+pgId: pgId,
+startDate: startDate,
+endDate: endDate
+})
+});
+
+const result = await res.json();
+
+if(result.success){
+alert("Booking Success ✅");
+}else{
+alert("Booking Failed ❌");
+}
+
+}catch(err){
+console.log(err);
+alert("Server Error ❌");
+}
+
+});
+
+</script>
+
+</body>
+</html>

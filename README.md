@@ -10,16 +10,16 @@ The system also provides administrative pages to manage PG listings and bookings
 
 ## 🚀 Technologies Used
 
-**Frontend**
+### Frontend
 - HTML5
 - CSS3
 - JavaScript
 
-**Backend**
+### Backend
 - Node.js
 - Express.js
 
-**Database**
+### Database
 - MongoDB
 - Mongoose
 
@@ -62,7 +62,8 @@ PG-HOSTEL-BOOKING-SYSTEM/
 │   ├── booking.html
 │   └── dashboard.html
 │
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ## ⚙️ Installation and Setup
